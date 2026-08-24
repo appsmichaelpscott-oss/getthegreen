@@ -1,0 +1,16 @@
+{
+  "name": "fl-deals-scraper",
+  "version": "2.0.0",
+  "description": "Full daily-automated scraper for FL Deals — headless browser for JS-rendered brands, plain fetch for the rest, merged and written straight into the site HTML by GitHub Actions on a schedule.",
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape.js",
+    "scrape:static": "node scrape-static.js",
+    "scrape:one": "node scrape.js --only",
+    "update-site": "node update-site.js"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0",
+    "cheerio": "^1.0.0"
+  }
+}

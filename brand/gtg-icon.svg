@@ -1,0 +1,35 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gtg-grad" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3EDCA0"/>
+      <stop offset="1" stop-color="#5DA9FF"/>
+    </linearGradient>
+    <radialGradient id="gtg-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)">
+      <stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- badge base -->
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gtg-glow)"/>
+  <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#gtg-grad)" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- custom G monogram: open ring with a coin-slot terminal -->
+  <path
+    d="M 87 46
+       C 80 33 64 27 50 33
+       C 33 40 26 60 33 77
+       C 40 94 60 101 77 94
+       C 88.5 89.3 96 79.5 97.5 68"
+    stroke="url(#gtg-grad)"
+    stroke-width="11"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- terminal bar, turning the G's opening into a coin-slot / token notch -->
+  <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#gtg-grad)"/>
+
+  <!-- spark dot: the "get" moment, sitting where the G's counter would close -->
+  <circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+</svg>

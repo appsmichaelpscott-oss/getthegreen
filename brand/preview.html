@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  body {
+    background: radial-gradient(circle at 15% 0%, #14231F 0%, #0A0D0C 45%);
+    color: #F3F4F8; font-family: -apple-system, sans-serif;
+    padding: 40px; display: flex; flex-direction: column; gap: 50px; align-items: flex-start;
+  }
+  .row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .label { font-size: 12px; color: #8B968F; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+  .swatch { background: #141B18; border: 1px solid #26302A; border-radius: 16px; padding: 24px; display: flex; align-items: center; }
+  .swatch.light { background: #F3F4F8; }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="label">Full lockup — large</div>
+  <div class="swatch">
+    <svg width="420" height="128" viewBox="0 0 420 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#3EDCA0"/><stop offset="1" stop-color="#5DA9FF"/>
+        </linearGradient>
+        <radialGradient id="gl1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)">
+          <stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/><stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/>
+      <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gl1)"/>
+      <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#g1)" stroke-opacity="0.4" stroke-width="1.5"/>
+      <path d="M 87 46 C 80 33 64 27 50 33 C 33 40 26 60 33 77 C 40 94 60 101 77 94 C 88.5 89.3 96 79.5 97.5 68" stroke="url(#g1)" stroke-width="11" stroke-linecap="round" fill="none"/>
+      <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#g1)"/>
+      <circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+      <text x="148" y="58" font-family="'Baloo 2', sans-serif" font-weight="700" font-size="34" fill="#8B968F" letter-spacing="-0.5">Get the</text>
+      <text x="148" y="100" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="42" fill="#3EDCA0" letter-spacing="-1">Green</text>
+    </svg>
+  </div>
+</div>
+
+<div>
+  <div class="label">Icon only — badge sizes (64px / 40px / 24px, actual sticky-header scale)</div>
+  <div class="row">
+    <div class="swatch">
+      <svg width="64" height="64" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g2" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3EDCA0"/><stop offset="1" stop-color="#5DA9FF"/></linearGradient>
+        <radialGradient id="gl2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)"><stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/><stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/></radialGradient></defs>
+        <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/><rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gl2)"/>
+        <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#g2)" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path d="M 87 46 C 80 33 64 27 50 33 C 33 40 26 60 33 77 C 40 94 60 101 77 94 C 88.5 89.3 96 79.5 97.5 68" stroke="url(#g2)" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#g2)"/><circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+      </svg>
+    </div>
+    <div class="swatch">
+      <svg width="40" height="40" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g3" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3EDCA0"/><stop offset="1" stop-color="#5DA9FF"/></linearGradient>
+        <radialGradient id="gl3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)"><stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/><stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/></radialGradient></defs>
+        <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/><rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gl3)"/>
+        <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#g3)" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path d="M 87 46 C 80 33 64 27 50 33 C 33 40 26 60 33 77 C 40 94 60 101 77 94 C 88.5 89.3 96 79.5 97.5 68" stroke="url(#g3)" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#g3)"/><circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+      </svg>
+    </div>
+    <div class="swatch">
+      <svg width="24" height="24" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g4" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3EDCA0"/><stop offset="1" stop-color="#5DA9FF"/></linearGradient>
+        <radialGradient id="gl4" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)"><stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/><stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/></radialGradient></defs>
+        <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/><rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gl4)"/>
+        <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#g4)" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path d="M 87 46 C 80 33 64 27 50 33 C 33 40 26 60 33 77 C 40 94 60 101 77 94 C 88.5 89.3 96 79.5 97.5 68" stroke="url(#g4)" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#g4)"/><circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="label">Icon on white (for light-mode contexts / app icon test)</div>
+  <div class="swatch light">
+    <svg width="80" height="80" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g5" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3EDCA0"/><stop offset="1" stop-color="#5DA9FF"/></linearGradient>
+      <radialGradient id="gl5" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 24) rotate(90) scale(90)"><stop offset="0" stop-color="#3EDCA0" stop-opacity="0.35"/><stop offset="1" stop-color="#3EDCA0" stop-opacity="0"/></radialGradient></defs>
+      <rect x="4" y="4" width="120" height="120" rx="30" fill="#0F1512"/><rect x="4" y="4" width="120" height="120" rx="30" fill="url(#gl5)"/>
+      <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="29.25" stroke="url(#g5)" stroke-opacity="0.4" stroke-width="1.5"/>
+      <path d="M 87 46 C 80 33 64 27 50 33 C 33 40 26 60 33 77 C 40 94 60 101 77 94 C 88.5 89.3 96 79.5 97.5 68" stroke="url(#g5)" stroke-width="11" stroke-linecap="round" fill="none"/>
+      <rect x="70" y="62" width="27.5" height="11" rx="5.5" fill="url(#g5)"/><circle cx="64" cy="64" r="6.5" fill="#F3F4F8"/>
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>
