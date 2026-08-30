@@ -433,7 +433,7 @@
     <div class="top-row">
       <span class="badge-pill">FL DEALS <span class="chev">›</span></span>
       <div class="header-meta">
-        <span class="header-meta-line accent">🕙 Updated today · 10:00am ET</span>
+        <span class="header-meta-line accent" id="last-updated-line">🕙 Updated ...</span>
         <span class="header-meta-line">22 brands tracked</span>
         <span class="header-meta-line ad-countdown" id="ad-countdown">📺 Next ad in <b>30:00</b></span>
       </div>
@@ -1498,276 +1498,91 @@ function renderCompare(){
 // actual current page (see /scraper folder for the parsers + proof).
 // Brands not yet individually confirmed show an honest empty state below —
 // NOT filled with guessed or copied data from another brand.
-// Re-pulled: August 29, 2026 (automated daily run). Brands marked "live" below
-// were freshly re-verified this pass. Brands whose scrape failed today kept
-// their last successfully-scraped data rather than being wiped blank.
+// Set automatically by the daily automation (update-site.js) every time
+// it runs — do not hand-edit this during a normal day, it gets overwritten
+// on the next scheduled run anyway. Format: "Sep 3 · 10:00am ET".
+const LAST_UPDATED = "Aug 29 · 10:00am ET";
+
+// Re-pulled: July 26, 2026. Brands marked "live" below were freshly
+// re-verified this pass (fresh deal names/prices confirmed against the
+// brand's own site). Brands still marked "blocked"/"pending" were
+// re-checked but the underlying access problem hadn't changed since the
+// last pull — noted per-brand.
 const DEALS_DATA = {
-  "curaleaf": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "60% off ALL Edibles",
-        "expires": "Till 07:30 PM Jul 26"
-      },
-      {
-        "name": "50% off Everything Else!",
-        "expires": "Till 07:30 PM Jul 26"
-      },
-      {
-        "name": "2 for $85 OG BRIQS",
-        "expires": "Till 07:30 PM Jul 26"
-      },
-      {
-        "name": "40% off Rosin Concentrates",
-        "expires": "Till 07:30 PM Jul 26"
-      },
-      {
-        "name": "6 for $31 Pre-Rolls - Select Strains",
-        "expires": "Till 8:30 PM, Dec 31"
-      }
-    ]
-  },
-  "trulieve": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "$17.50 3.5g Flower — DeliZiozo, Shipwreck, SlyLook & more",
-        "expires": "7/24 – 7/26"
-      },
-      {
-        "name": "2 for $50 Flower — Chrome Berry, Miami Vice, Yellowfin & more",
-        "expires": "7/24 – 7/26"
-      },
-      {
-        "name": "$10 Classic Gummies (10-year anniversary price)",
-        "expires": "7/24 – 7/26"
-      },
-      {
-        "name": "Premium Flower Bundles — 2 for $90 / 3 for $120 / 4 for $140 (Khalifa Kush, Connected, Alien Labs, Cultivar)",
-        "expires": "7/24 – 7/25"
-      }
-    ]
-  },
-  "surterra-wellness": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "Select Float 1/8th Flower — as low as 60% off",
-        "expires": "While supplies last"
-      },
-      {
-        "name": "Float 1g Distillate & 1g Kief — 60% off",
-        "expires": "While supplies last"
-      },
-      {
-        "name": "Surterra Wellness 1g Full Spectrum Oil — 60% off",
-        "expires": "While supplies last"
-      },
-      {
-        "name": "Heights Chocolate Bars — 50% off",
-        "expires": "While supplies last"
-      },
-      {
-        "name": "Surterra Wellness Pure Reserve Oil — 55% off",
-        "expires": "While supplies last"
-      }
-    ]
-  },
-  "muv": {
-    "status": "blocked",
-    "note": "Re-checked — deals page is still blocked by robots.txt. Structural discount tiers (new patient, veteran, card renewal) are confirmed current via third-party listings, but no live rotating-deal scrape is possible without the email fallback"
-  },
-  "ayr-cannabis-dispensary": {
-    "status": "pending",
-    "note": "Re-checked — specials still load via a JS widget requiring headless-browser rendering. Structural discounts (25% first responder, 15% senior, $75/$150 card renewal) reconfirmed current as of late June 2026"
-  },
-  "fluent": {
-    "status": "pending",
-    "note": "Re-checked — deal names still findable but discount % still lives in an image graphic, not readable text. No change from last pull"
-  },
-  "sunnyside": {
-    "status": "pending",
-    "note": "Re-checked — still a fully JS-rendered SPA, no static content without headless browser"
-  },
-  "growhealthy": {
-    "status": "pending",
-    "note": "Re-checked — still Dutchie-powered with an empty-shell deals widget on plain fetch"
-  },
-  "gti-florida": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "$20 Tuesdays — select premium cannabis storewide",
-        "expires": "Tuesdays"
-      },
-      {
-        "name": "Dr. Solomon's 100mg 10pk Distillate Chews — $9 (was $15)",
-        "expires": "Current"
-      },
-      {
-        "name": "0.5g Live Rosin Cartridges — $30 (was $45)",
-        "expires": "Current"
-      },
-      {
-        "name": "1g Distillate Vape Carts — $25 (was $30)",
-        "expires": "Current"
-      }
-    ]
-  },
-  "the-flowery": {
-    "status": "blocked",
-    "note": "Re-checked — deals page still blocked by robots.txt"
-  },
-  "jungle-boys": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "4/$79 Mix & Match Oils — 510s, Trim Run, Chews, RSO",
-        "expires": "Current"
-      },
-      {
-        "name": "Spend $125+ Unlock $15 Kush Mints 8ths",
-        "expires": "Current"
-      },
-      {
-        "name": "Super Premium 8ths — $99 Half Ounces (Animal Tsunami, Amaretto Di Limon, All Cherriez)",
-        "expires": "Current"
-      },
-      {
-        "name": "Ultra Premium 8ths — $125 Half Ounces (Waffle Cone, Grease Bucket #11 x Runtz)",
-        "expires": "Current"
-      }
-    ]
-  },
-  "sunburn": {
-    "status": "pending",
-    "note": "Re-checked — still per-location on Flowhub subdomains, not centrally scrapable"
-  },
-  "goldflower-cannabis": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "Turn 2g Distillate Disposables — $45 (was $95)",
-        "expires": "Current"
-      },
-      {
-        "name": "7-Pack Pre-Rolls — $36 (was $60–84)",
-        "expires": "Current"
-      },
-      {
-        "name": "Ideal Cannabis Live Rosin Cartridges — from $26 (was $50)",
-        "expires": "Current"
-      }
-    ]
-  },
-  "planet-13-florida": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "$13 Select Flower 1/8ths",
-        "expires": "Current"
-      },
-      {
-        "name": "$13 Select 0.5g Distillate Vapes",
-        "expires": "Current"
-      },
-      {
-        "name": "$10 Select Edibles",
-        "expires": "Current"
-      },
-      {
-        "name": "3 for $60 1g Distillate Vape",
-        "expires": "Current"
-      },
-      {
-        "name": "30% Off Planet 13 Edibles",
-        "expires": "Current"
-      }
-    ]
-  },
-  "sanctuary-cannabis": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "Build Your Own Bundle — Any 3 for $70 (excl. items)",
-        "expires": "Current"
-      },
-      {
-        "name": "100mg Distillate Chews — $9 (was $15)",
-        "expires": "Current"
-      },
-      {
-        "name": "1g Distillate Vape Carts — $23 (was $30)",
-        "expires": "Current"
-      },
-      {
-        "name": "1g Live Rosin Concentrate — $39 (was $65)",
-        "expires": "Current"
-      },
-      {
-        "name": "Extra 10% Off (60% max) for Veterans",
-        "expires": "Current"
-      }
-    ]
-  },
-  "green-dragon": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "$10 Green Dragon Chews",
-        "expires": "Current month"
-      },
-      {
-        "name": "BOGO Select Vapes",
-        "expires": "Current"
-      },
-      {
-        "name": "$20 Select Cloud Sugar Strains",
-        "expires": "All week"
-      },
-      {
-        "name": "Greener Savings — up to 50% Off",
-        "expires": "Limited time"
-      }
-    ]
-  },
-  "cookies-florida": {
-    "status": "pending",
-    "note": "Re-checked — national deals page still doesn't render location-specific current deals with prices; per-location Weedmaps menus show live pricing but not a static scrapable deals feed"
-  },
-  "mint-cannabis": {
-    "status": "pending",
-    "note": "Re-checked — deals page still returns an empty shell without JS rendering"
-  },
-  "insa": {
-    "status": "pending",
-    "note": "Re-checked — no confirmed current live deal found beyond stale listings, needs individual store's live page"
-  },
-  "one-plant-cannabis": {
-    "status": "pending",
-    "note": "Re-checked — Daily Deals page is still JS-rendered ('Load More' list), no static deal content in a plain fetch"
-  },
-  "eden-florida": {
-    "status": "live",
-    "deals": [
-      {
-        "name": "Tier 1 Vape Pen — 2 for $80",
-        "expires": "Current"
-      },
-      {
-        "name": "AIO Vape Pen — $30 (was $50)",
-        "expires": "Current"
-      },
-      {
-        "name": "Garden Reserve 7g — $65 (was $90)",
-        "expires": "Current"
-      }
-    ]
-  },
-  "fino-cannabis": {
-    "status": "pending",
-    "note": "Re-checked — still a very new brand, Specials page exists but no priced deal content rendered yet"
-  }
+  "curaleaf": { status: "live", deals: [
+    { name: "60% off ALL Edibles", expires: "Till 07:30 PM Jul 26" },
+    { name: "50% off Everything Else!", expires: "Till 07:30 PM Jul 26" },
+    { name: "2 for $85 OG BRIQS", expires: "Till 07:30 PM Jul 26" },
+    { name: "40% off Rosin Concentrates", expires: "Till 07:30 PM Jul 26" },
+    { name: "6 for $31 Pre-Rolls - Select Strains", expires: "Till 8:30 PM, Dec 31" }
+  ]},
+  "trulieve": { status: "live", deals: [
+    { name: "$17.50 3.5g Flower — DeliZiozo, Shipwreck, SlyLook & more", expires: "7/24 – 7/26" },
+    { name: "2 for $50 Flower — Chrome Berry, Miami Vice, Yellowfin & more", expires: "7/24 – 7/26" },
+    { name: "$10 Classic Gummies (10-year anniversary price)", expires: "7/24 – 7/26" },
+    { name: "Premium Flower Bundles — 2 for $90 / 3 for $120 / 4 for $140 (Khalifa Kush, Connected, Alien Labs, Cultivar)", expires: "7/24 – 7/25" }
+  ]},
+  "surterra-wellness": { status: "live", deals: [
+    { name: "Select Float 1/8th Flower — as low as 60% off", expires: "While supplies last" },
+    { name: "Float 1g Distillate & 1g Kief — 60% off", expires: "While supplies last" },
+    { name: "Surterra Wellness 1g Full Spectrum Oil — 60% off", expires: "While supplies last" },
+    { name: "Heights Chocolate Bars — 50% off", expires: "While supplies last" },
+    { name: "Surterra Wellness Pure Reserve Oil — 55% off", expires: "While supplies last" }
+  ]},
+  "muv": { status: "blocked", note: "Re-checked — deals page is still blocked by robots.txt. Structural discount tiers (new patient, veteran, card renewal) are confirmed current via third-party listings, but no live rotating-deal scrape is possible without the email fallback" },
+  "ayr-cannabis-dispensary": { status: "pending", note: "Re-checked — specials still load via a JS widget requiring headless-browser rendering. Structural discounts (25% first responder, 15% senior, $75/$150 card renewal) reconfirmed current as of late June 2026" },
+  "fluent": { status: "pending", note: "Re-checked — deal names still findable but discount % still lives in an image graphic, not readable text. No change from last pull" },
+  "sunnyside": { status: "pending", note: "Re-checked — still a fully JS-rendered SPA, no static content without headless browser" },
+  "growhealthy": { status: "pending", note: "Re-checked — still Dutchie-powered with an empty-shell deals widget on plain fetch" },
+  "gti-florida": { status: "live", deals: [
+    { name: "$20 Tuesdays — select premium cannabis storewide", expires: "Tuesdays" },
+    { name: "Dr. Solomon's 100mg 10pk Distillate Chews — $9 (was $15)", expires: "Current" },
+    { name: "0.5g Live Rosin Cartridges — $30 (was $45)", expires: "Current" },
+    { name: "1g Distillate Vape Carts — $25 (was $30)", expires: "Current" }
+  ]},
+  "the-flowery": { status: "blocked", note: "Re-checked — deals page still blocked by robots.txt" },
+  "jungle-boys": { status: "live", deals: [
+    { name: "4/$79 Mix & Match Oils — 510s, Trim Run, Chews, RSO", expires: "Current" },
+    { name: "Spend $125+ Unlock $15 Kush Mints 8ths", expires: "Current" },
+    { name: "Super Premium 8ths — $99 Half Ounces (Animal Tsunami, Amaretto Di Limon, All Cherriez)", expires: "Current" },
+    { name: "Ultra Premium 8ths — $125 Half Ounces (Waffle Cone, Grease Bucket #11 x Runtz)", expires: "Current" }
+  ]},
+  "sunburn": { status: "pending", note: "Re-checked — still per-location on Flowhub subdomains, not centrally scrapable" },
+  "goldflower-cannabis": { status: "live", deals: [
+    { name: "Turn 2g Distillate Disposables — $45 (was $95)", expires: "Current" },
+    { name: "7-Pack Pre-Rolls — $36 (was $60–84)", expires: "Current" },
+    { name: "Ideal Cannabis Live Rosin Cartridges — from $26 (was $50)", expires: "Current" }
+  ]},
+  "planet-13-florida": { status: "live", deals: [
+    { name: "$13 Select Flower 1/8ths", expires: "Current" },
+    { name: "$13 Select 0.5g Distillate Vapes", expires: "Current" },
+    { name: "$10 Select Edibles", expires: "Current" },
+    { name: "3 for $60 1g Distillate Vape", expires: "Current" },
+    { name: "30% Off Planet 13 Edibles", expires: "Current" }
+  ]},
+  "sanctuary-cannabis": { status: "live", deals: [
+    { name: "Build Your Own Bundle — Any 3 for $70 (excl. items)", expires: "Current" },
+    { name: "100mg Distillate Chews — $9 (was $15)", expires: "Current" },
+    { name: "1g Distillate Vape Carts — $23 (was $30)", expires: "Current" },
+    { name: "1g Live Rosin Concentrate — $39 (was $65)", expires: "Current" },
+    { name: "Extra 10% Off (60% max) for Veterans", expires: "Current" }
+  ]},
+  "green-dragon": { status: "live", deals: [
+    { name: "$10 Green Dragon Chews", expires: "Current month" },
+    { name: "BOGO Select Vapes", expires: "Current" },
+    { name: "$20 Select Cloud Sugar Strains", expires: "All week" },
+    { name: "Greener Savings — up to 50% Off", expires: "Limited time" }
+  ]},
+  "cookies-florida": { status: "pending", note: "Re-checked — national deals page still doesn't render location-specific current deals with prices; per-location Weedmaps menus show live pricing but not a static scrapable deals feed" },
+  "mint-cannabis": { status: "pending", note: "Re-checked — deals page still returns an empty shell without JS rendering" },
+  "insa": { status: "pending", note: "Re-checked — no confirmed current live deal found beyond stale listings, needs individual store's live page" },
+  "one-plant-cannabis": { status: "pending", note: "Re-checked — Daily Deals page is still JS-rendered ('Load More' list), no static deal content in a plain fetch" },
+  "eden-florida": { status: "live", deals: [
+    { name: "Tier 1 Vape Pen — 2 for $80", expires: "Current" },
+    { name: "AIO Vape Pen — $30 (was $50)", expires: "Current" },
+    { name: "Garden Reserve 7g — $65 (was $90)", expires: "Current" }
+  ]},
+  "fino-cannabis": { status: "pending", note: "Re-checked — still a very new brand, Specials page exists but no priced deal content rendered yet" }
 };
 
 // Each brand's actual deals/specials page — used for the "View deals" link
@@ -1852,8 +1667,29 @@ function renderSponsor(){
     </div>`;
 }
 
+// Sort mode for the All Deals brand list. Defaults to footprint (current
+// behavior) but a big brand like Trulieve will structurally always win
+// that sort — this gives people a way out of always seeing the same
+// brand on top, without needing accounts or a "favorites" system.
+let nearbySortMode = "footprint";
+let nearbyShuffleSeed = null; // fixed per shuffle-selection, not re-randomized on every re-render
+
+function sortBrandsForNearby(brands) {
+  if (nearbySortMode === "az") {
+    return [...brands].sort((a, b) => a.name.localeCompare(b.name));
+  }
+  if (nearbySortMode === "shuffle") {
+    if (!nearbyShuffleSeed) {
+      nearbyShuffleSeed = [...brands].sort(() => Math.random() - 0.5).map(b => b.id);
+    }
+    const order = nearbyShuffleSeed;
+    return [...brands].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+  }
+  return [...brands].sort((a, b) => (a.rank || 999) - (b.rank || 999)); // footprint, default
+}
+
 function renderNearby(){
-  const brands = [...DATA.brands].sort((a,b)=>(a.rank||999)-(b.rank||999));
+  const brands = sortBrandsForNearby(DATA.brands);
   const rows = brands.map(b => {
     const accent = tierGroup(locNum(b.locationsRaw)).accent;
     const dealInfo = DEALS_DATA[b.id];
@@ -1885,12 +1721,31 @@ function renderNearby(){
       </div>`;
   }).join("");
 
+  const sortLabels = {
+    footprint: "Ranked by footprint size for now — this becomes a true distance-sorted list (closest to you first, regardless of brand size) once real per-location GPS data is built.",
+    az: "Sorted alphabetically — every brand gets equal billing, largest or smallest.",
+    shuffle: "Shuffled — a fresh random order, so the same big brand isn't always sitting on top."
+  };
+
   document.getElementById("view-nearby").innerHTML = `
     ${renderSponsor()}
-    <div class="section-heading">🏆 All 22 brands</div>
-    <p class="section-desc">Ranked by footprint size for now — this becomes a true distance-sorted list (closest to you first, regardless of brand size) once real per-location GPS data is built. Short synopsis of what we found for each brand — tap "View deals" for the real, exact current pricing straight from the source.</p>
+    <div class="section-heading" style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <span>🏆 All 22 brands</span>
+      <select class="filter-select" id="nearby-sort-select" style="font-size:12px;">
+        <option value="footprint" ${nearbySortMode==="footprint"?"selected":""}>Sort: Most locations</option>
+        <option value="az" ${nearbySortMode==="az"?"selected":""}>Sort: A–Z</option>
+        <option value="shuffle" ${nearbySortMode==="shuffle"?"selected":""}>Sort: Shuffle</option>
+      </select>
+    </div>
+    <p class="section-desc">${sortLabels[nearbySortMode]} Short synopsis of what we found for each brand — tap "View deals" for the real, exact current pricing straight from the source.</p>
     <div class="group-frame"><div>${rows}</div></div>
   `;
+
+  document.getElementById("nearby-sort-select").addEventListener("change", (e) => {
+    nearbySortMode = e.target.value;
+    if (nearbySortMode !== "shuffle") nearbyShuffleSeed = null; // re-shuffle fresh next time shuffle is picked
+    renderNearby();
+  });
 }
 
 function renderContact(){
@@ -2162,6 +2017,8 @@ function tickAdCountdown() {
   }
   if (label) label.innerHTML = `📺 Next ad in <b>${formatCountdown(adNextFireAt - Date.now())}</b>`;
 }
+document.getElementById("last-updated-line").textContent = `🕙 Updated ${LAST_UPDATED}`;
+
 tickAdCountdown();
 setInterval(tickAdCountdown, 1000);
 
