@@ -1,0 +1,55 @@
+name: Daily deal refresh
+
+on:
+  schedule:
+    # Fires 3x/day: 10am, 12pm, 2pm ET. In UTC that's 14:00, 16:00, 18:00
+    # during EDT (summer). GitHub's cron doesn't shift for daylight saving,
+    # so all three times drift an hour earlier in real-world ET once
+    # clocks fall back in November — not worth the complexity to fix
+    # unless that becomes a real problem.
+    - cron: "0 14 * * *"
+    - cron: "0 16 * * *"
+    - cron: "0 18 * * *"
+  workflow_dispatch: {} # lets you also trigger it manually from the GitHub Actions tab if you ever want to, without it being required
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed so the workflow can commit the updated site file back to the repo
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install scraper dependencies
+        working-directory: ./scraper
+        run: npm install
+
+      - name: Install headless browser
+        working-directory: ./scraper
+        run: npx playwright install --with-deps chromium
+
+      - name: Run static (plain-fetch) scraper
+        working-directory: ./scraper
+        run: node scrape-static.js
+
+      - name: Run headless-browser scraper
+        working-directory: ./scraper
+        run: node scrape.js
+
+      - name: Merge results into the live site file
+        working-directory: ./scraper
+        run: node update-site.js ../site/index.html
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "get-the-green-bot"
+          git config user.email "actions@github.com"
+          git add site/index.html
+          git diff --staged --quiet && echo "No changes today" || git commit -m "Automated daily deal refresh"
+          git push
