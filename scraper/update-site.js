@@ -66,13 +66,34 @@ async function main() {
     `// their last successfully-scraped data rather than being wiped blank.\n` +
     `const DEALS_DATA = ${JSON.stringify(current, null, 2)};`;
 
-  const updatedHtml = html.replace(
+  let updatedHtml = html.replace(
     /(\/\/ Re-pulled:[\s\S]*?)?const DEALS_DATA = \{[\s\S]*?\n\};/,
     () => newBlock // function replacer avoids $-pattern corruption from dollar amounts like "$150" in deal data
   );
 
+  // Also stamp the header's "Updated ..." display with the real date/time
+  // this run actually happened, in ET, so visitors can see it's Sep 3 at
+  // 10am rather than just a vague "updated today".
+  const lastUpdatedStr = formatLastUpdated(new Date());
+  updatedHtml = updatedHtml.replace(
+    /const LAST_UPDATED = "[^"]*";/,
+    () => `const LAST_UPDATED = "${lastUpdatedStr}";`
+  );
+
   await writeFile(SITE_PATH, updatedHtml);
   console.log(`Updated ${updatedCount} brand(s), kept ${keptStaleCount} brand(s) on yesterday's data after a failed scrape.`);
+  console.log(`Stamped LAST_UPDATED as: ${lastUpdatedStr}`);
+}
+
+function formatLastUpdated(date) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    month: "short", day: "numeric",
+    hour: "numeric", minute: "2-digit", hour12: true,
+  }).formatToParts(date);
+  const get = (type) => parts.find((p) => p.type === type)?.value || "";
+  const dayPeriod = get("dayPeriod").toLowerCase(); // "am" / "pm"
+  return `${get("month")} ${get("day")} · ${get("hour")}:${get("minute")}${dayPeriod} ET`;
 }
 
 main();
