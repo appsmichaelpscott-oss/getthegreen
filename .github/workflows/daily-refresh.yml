@@ -42,13 +42,20 @@ jobs:
         working-directory: ./scraper
         run: node scrape.js
 
+      - name: Run multi-location scraper (Cookies Florida, Sunburn)
+        working-directory: ./scraper
+        run: node scrape-multilocation.js
+
       - name: Merge results into the live site file
         working-directory: ./scraper
+        # Site file lives in the "site" folder at the repo root, named
+        # index.html (not fl-deals-preview.html — that was the old name
+        # before the rebrand).
         run: node update-site.js ../site/index.html
 
       - name: Commit and push if anything changed
         run: |
-          git config user.name "get-the-green-bot"
+          git config user.name "sunbud-bot"
           git config user.email "actions@github.com"
           git add site/index.html
           git diff --staged --quiet && echo "No changes today" || git commit -m "Automated daily deal refresh"
