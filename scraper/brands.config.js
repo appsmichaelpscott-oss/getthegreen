@@ -81,9 +81,9 @@ export const BRANDS = [
 //                                of scope regardless of feasibility.
 //   - fluent                  -> pricing is inside an image graphic;
 //                                needs OCR, a separate tool from this.
-//   - cookies-florida         -> deals are per-location, not JS-blocked;
-//                                needs a location-URL loop, not headless
-//                                rendering. Different fix, see scrape.js
+//   - cookies-florida, sunburn -> per-location deals — now handled by
+//                                scrape-multilocation.js instead, not
+//                                this file. See that script + its config.
 //                                notes.
 //   - insa, fino-cannabis     -> source data itself is thin/stale, no
 //                                scraper fixes that.
