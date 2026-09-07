@@ -1,9 +1,10 @@
 // update-site.js
 //
-// Runs after scrape.js (headless) and scrape-static.js (plain fetch) have
-// both written their JSON output. Merges the two, then finds and replaces
-// the DEALS_DATA object inside the site's HTML file in place — same file,
-// same DEALS_DATA shape, just with today's numbers.
+// Runs after scrape.js (headless), scrape-static.js (plain fetch), and
+// scrape-multilocation.js (per-store brands like Cookies Florida and
+// Sunburn) have all written their JSON output. Merges all three, then
+// finds and replaces the DEALS_DATA object inside the site's HTML file
+// in place — same file, same DEALS_DATA shape, just with today's numbers.
 //
 // Only overwrites brands that actually came back "live" from today's run.
 // Brands that failed today keep YESTERDAY'S data untouched rather than
@@ -29,11 +30,12 @@ async function loadJsonIfExists(path) {
 }
 
 async function main() {
-  const [headless, staticData] = await Promise.all([
+  const [headless, staticData, multilocation] = await Promise.all([
     loadJsonIfExists("./deals-data.json"),
     loadJsonIfExists("./deals-data-static.json"),
+    loadJsonIfExists("./deals-data-multilocation.json"),
   ]);
-  const fresh = { ...headless, ...staticData };
+  const fresh = { ...headless, ...staticData, ...multilocation };
 
   const html = await readFile(SITE_PATH, "utf8");
   const match = html.match(/const DEALS_DATA = (\{[\s\S]*?\n\};)/);
