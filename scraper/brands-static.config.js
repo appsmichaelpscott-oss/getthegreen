@@ -104,5 +104,6 @@ export const STATIC_BRANDS = [
 //   - muv, the-flowery       -> robots.txt-blocked, needs the Resend email
 //                                fallback pipeline
 //   - fluent                 -> price is inside an image, needs OCR
-//   - cookies-florida        -> per-location, needs a store-URL loop
+//   - cookies-florida, sunburn -> per-location — now handled by
+//                                scrape-multilocation.js instead
 //   - insa, fino-cannabis    -> source data itself too thin to scrape
